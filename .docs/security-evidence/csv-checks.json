@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-10-26T14:49:46.052Z",
+  "checkCount": 1,
+  "input": "=1+1",
+  "encodedCell": "\"=1+1\"",
+  "formulaPrefixPreserved": true,
+  "networkRequests": 0,
+  "limitations": "Only the actual encoder is evaluated. Formula execution in Excel and attacker control of a real Google listing are not tested."
+}

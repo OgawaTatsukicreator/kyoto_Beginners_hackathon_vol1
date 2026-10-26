@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-10-26T14:49:45.948Z",
+  "runtime": "v20.19.1",
+  "scope": "Offline source extraction with fetch/localStorage/React-state mocks; not an end-to-end browser or live database test.",
+  "networkRequests": 0,
+  "applicationSourceChanged": false,
+  "transpilation": "No third-party transpiler. The script validates and removes only exact TypeScript annotations in extracted functions; submit callback is unmodified JavaScript.",
+  "sourceSha256": {
+    "lib/remotePosts.ts": "0c2f18a33c6f6f12b604fce685da31404ac6ae85dfec9c1445190da25bf1d11e",
+    "app/new/page.tsx": "74106675dc2158db3300a0c3797e76d027e0f106b92159ad54acc7efa42c736a",
+    "lib/settings.ts": "3877c8117bb0e000e361f5130a26133528727bad1d592ce8eadcc1fb4dbc5d5a",
+    "app/post/[id]/page.tsx": "636484fab3c17b994c825814e4558968be6e11ecf7d020b55a08d83fb52aa498"
+  },
+  "checks": [
+    {
+      "id": "post-deletion-capability-normal",
+      "kind": "executed-source-with-mocks",
+      "passed": true,
+      "actual": {
+        "mode": "normal",
+        "ok": true,
+        "mockedPostRequests": 1,
+        "canDeletePost": true,
+        "postedHashIsNull": false,
+        "storedToken": true
+      }
+    },
+    {
+      "id": "post-deletion-capability-storage-unavailable",
+      "kind": "executed-source-with-mocks",
+      "passed": true,
+      "actual": {
+        "mode": "storage-unavailable",
+        "ok": true,
+        "mockedPostRequests": 1,
+        "canDeletePost": false,
+        "postedHashIsNull": false,
+        "storedToken": false
+      }
+    },
+    {
+      "id": "post-deletion-capability-crypto-unavailable",
+      "kind": "executed-source-with-mocks",
+      "passed": true,
+      "actual": {
+        "mode": "crypto-unavailable",
+        "ok": true,
+        "mockedPostRequests": 1,
+        "canDeletePost": false,
+        "postedHashIsNull": true,
+        "storedToken": false
+      }
+    },
+    {
+      "id": "opt-out-edited-place-keeps-original-gps",
+      "kind": "executed-source-with-mocks",
+      "passed": true,
+      "actual": {
+        "sharePlace": false,
+        "settingsReads": 0,
+        "submittedPlace": "京都府（synthetic general area）",
+        "submittedLat": 35.1234567,
+        "submittedLng": 135.7654321
+      }
+    },
+    {
+      "id": "opt-out-empty-place-reinserts-gps",
+      "kind": "executed-source-with-mocks",
+      "passed": true,
+      "actual": {
+        "sharePlace": false,
+        "settingsReads": 0,
+        "submittedPlace": "35.12346, 135.76543",
+        "submittedLat": 35.1234567,
+        "submittedLng": 135.7654321
+      }
+    },
+    {
+      "id": "locked-content-delivered-in-full",
+      "kind": "executed-fetch-conversion-with-mocks-and-source-assertion",
+      "passed": true,
+      "actual": {
+        "querySelectsEveryColumn": true,
+        "fullBodyReturnedBeforeUnlock": true,
+        "placeReturnedBeforeUnlock": true,
+        "exactGpsReturnedBeforeUnlock": true,
+        "closedPaywallInterpolatesEntireBody": true
+      }
+    }
+  ]
+}

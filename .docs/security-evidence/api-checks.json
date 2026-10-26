@@ -1,0 +1,717 @@
+{
+  "generatedAt": "2026-10-26T14:49:45.839Z",
+  "scope": "Route handler logic, executed in a VM with a minimal NextResponse replacement.",
+  "realNetworkCalls": 0,
+  "realCredentialsRead": false,
+  "limitations": [
+    "Does not start Next.js or exercise its HTTP/cache layer.",
+    "Does not inspect Vercel/WAF settings or Google key restrictions, quotas, billing, or live API behavior.",
+    "Timeout signals are recorded and timeout failures are simulated; elapsed six-second behavior is not measured.",
+    "Mock success for out-of-range input proves forwarding only, not Google acceptance or billing."
+  ],
+  "checkCount": 18,
+  "verifiedCheckCount": 18,
+  "checks": [
+    {
+      "name": "normal coordinates reach both upstream services",
+      "query": "?lat=35.0116&lng=135.7681",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "missing coordinates are coerced to zero",
+      "query": "",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 0,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 0,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "missing longitude is coerced to zero",
+      "query": "?lat=35.0116",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "empty coordinates are coerced to zero",
+      "query": "?lat=&lng=",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 0,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 0,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "whitespace coordinates are coerced to zero",
+      "query": "?lat=%20&lng=%20",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 0,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 0,
+            "longitude": 0
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "positive out-of-range coordinates reach upstream",
+      "query": "?lat=91&lng=181",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 91,
+            "longitude": 181
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 91,
+            "longitude": 181
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "negative out-of-range coordinates reach upstream",
+      "query": "?lat=-91&lng=-181",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": -91,
+            "longitude": -181
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": -91,
+            "longitude": -181
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "very large finite coordinates reach upstream",
+      "query": "?lat=1e300&lng=1e300",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 1e+300,
+            "longitude": 1e+300
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": null,
+            "longitude": null
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "nonnumeric coordinates are rejected",
+      "query": "?lat=abc&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 400,
+          "body": {
+            "error": "lat/lng が不正です"
+          }
+        }
+      ],
+      "upstreamCallCount": 0,
+      "calls": [],
+      "verified": true
+    },
+    {
+      "name": "infinite coordinates are rejected",
+      "query": "?lat=Infinity&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 400,
+          "body": {
+            "error": "lat/lng が不正です"
+          }
+        }
+      ],
+      "upstreamCallCount": 0,
+      "calls": [],
+      "verified": true
+    },
+    {
+      "name": "URL injection string is rejected",
+      "query": "?lat=http%3A%2F%2F127.0.0.1&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 400,
+          "body": {
+            "error": "lat/lng が不正です"
+          }
+        }
+      ],
+      "upstreamCallCount": 0,
+      "calls": [],
+      "verified": true
+    },
+    {
+      "name": "query injection string is rejected",
+      "query": "?lat=35%26key%3Dattacker&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 400,
+          "body": {
+            "error": "lat/lng が不正です"
+          }
+        }
+      ],
+      "upstreamCallCount": 0,
+      "calls": [],
+      "verified": true
+    },
+    {
+      "name": "no configured key makes no upstream call",
+      "query": "?lat=35&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 204,
+          "body": null
+        }
+      ],
+      "upstreamCallCount": 0,
+      "calls": [],
+      "verified": true
+    },
+    {
+      "name": "place result returns after one call",
+      "query": "?lat=35&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "Offline test place",
+            "address": "Offline address",
+            "source": "place"
+          }
+        }
+      ],
+      "upstreamCallCount": 1,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35,
+            "longitude": 135
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "upstream HTTP error falls back to geocoding",
+      "query": "?lat=35&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35,
+            "longitude": 135
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35,
+            "longitude": 135
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "no upstream result returns 204",
+      "query": "?lat=35&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 204,
+          "body": null
+        }
+      ],
+      "upstreamCallCount": 2,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35,
+            "longitude": 135
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35,
+            "longitude": 135
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "upstream timeout is caught",
+      "query": "?lat=35&lng=135",
+      "repetitions": 1,
+      "responses": [
+        {
+          "status": 204,
+          "body": null
+        }
+      ],
+      "upstreamCallCount": 1,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35,
+            "longitude": 135
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "name": "five identical anonymous calls cause ten upstream calls",
+      "query": "?lat=35.0116&lng=135.7681",
+      "repetitions": 5,
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "京都府オフライン検証用",
+            "address": "京都府オフライン検証用",
+            "source": "address"
+          }
+        }
+      ],
+      "upstreamCallCount": 10,
+      "calls": [
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        },
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        },
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        },
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        },
+        {
+          "method": "POST",
+          "host": "places.googleapis.com",
+          "path": "/v1/places:searchNearby",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": "places.displayName,places.shortFormattedAddress,places.userRatingCount"
+        },
+        {
+          "method": "GET",
+          "host": "maps.googleapis.com",
+          "path": "/maps/api/geocode/json",
+          "coordinate": {
+            "latitude": 35.0116,
+            "longitude": 135.7681
+          },
+          "timeoutMs": 6000,
+          "fieldMask": null
+        }
+      ],
+      "verified": true
+    }
+  ]
+}
